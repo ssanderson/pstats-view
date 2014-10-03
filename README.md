@@ -1,7 +1,10 @@
 pstatsviewer
 =============
 
-A Graphical, Interactive PStats viewer/diff tool for IPython Notebook.
+An Interactive,  Graphical, Interactive PStats viewer/diff tool for IPython Notebook.
+
+`pstatsviewer` uses `pandas` dataframes to parse, align, and display the output of Python's built-in profiling tool, `cProfile`.
+It also provides the ability to compare two distinct pstats files, making it easy to do performance regression testing with different versions of the same code.
 
 ##Examples:
 ```
