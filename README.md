@@ -3,6 +3,7 @@ pstatsviewer
 
 A Graphical, Interactive PStats viewer/diff tool for IPython Notebook.
 
+##Examples:
 ```
 v1 = StatsViewer("./naive.stats")
 v2 = StatsViewer("./fast.stats")
@@ -21,9 +22,8 @@ v1.compare(v2)
 ![DiffTable](img/difftable.png)
 ![DiffGraph](img/diffgraph.png)
 
-To see what the output of `StatsViewer` looks like statically, you can look at the
-[Example Notebook on NBViewer](http://nbviewer.ipython.org/github/ssanderson/pstats-view/blob/master/examples/ExampleView.ipynb)
-(note that the interactive widget will not display on nbviewer).
+More usage examples can be seen in the [Example Notebook on NBViewer](http://nbviewer.ipython.org/github/ssanderson/pstats-view/blob/master/examples/ExampleView.ipynb)
+(note that the interactive widget view will not display on nbviewer).
 
 ##Running the Example Notebook
 1. Clone this repo.
