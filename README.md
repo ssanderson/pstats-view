@@ -8,7 +8,7 @@ It also provides the ability to compare two distinct pstats files, making it eas
 
 ##Examples:
 ```
-v1 = StatsViewer("./naive.stats")
+v = StatsViewer("./naive.stats")
 v2 = StatsViewer("./fast.stats")
 
 v1.view(25, 'cumtime')
@@ -20,7 +20,7 @@ v1.interact()
 ```
 ![InteractView](img/widgetoutput.png)
 ```
-v1.compare(v2)
+v.compare(v2)
 ```
 ![DiffTable](img/difftable.png)
 ![DiffGraph](img/diffgraph.png)
