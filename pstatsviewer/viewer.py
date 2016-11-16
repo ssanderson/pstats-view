@@ -4,11 +4,11 @@ A viewer for Stats objects.
 import os
 
 from IPython.display import display
-from IPython.html.widgets import interactive, IntSlider
+from ipywidgets import interactive, IntSlider
 import matplotlib.pyplot as plt
 import pandas as pd
 from pstats import Stats
-from qgrid import SlickGrid
+from qgrid.grid import show_grid
 from six import iteritems
 import seaborn as sns
 sns.set_palette("deep", desat=.6)
@@ -90,7 +90,7 @@ class StatsViewer(object):
             self._show_timing_data(data, field, ax=fig.add_subplo(loc))
 
     def _get_timing_data(self, count, sort, fields):
-        data = self.timings.sort(
+        data = self.timings.sort_values(
             sort,
             ascending=False
         )[fields].head(count)
@@ -122,14 +122,14 @@ class StatsViewer(object):
         plt.ylabel('Filename:Function Name')
 
     def _show_table(self, data):
-        display(SlickGrid(data, remote_js=self.remote_js))
+        return show_grid(data, remote_js=self.remote_js)
 
-    def grid(self, fields=None):
+    def table(self, fields=None):
         if fields is None:
             fields = self.default_view_fields
 
         data = self.timings[fields]
-        self._show_table(data)
+        return self._show_table(data)
 
     def chart(self, fields=None, **mpl_kwargs):
 
@@ -144,12 +144,10 @@ class StatsViewer(object):
                 **mpl_kwargs
             )
 
-        display(
-            interactive(
-                _interact,
-                count=IntSlider(min=5, max=100, step=5, value=20),
-                sort_by=('cumtime', 'tottime', 'ncalls'),
-            ),
+        return interactive(
+            _interact,
+            count=IntSlider(min=5, max=100, step=5, value=20),
+            sort_by=('cumtime', 'tottime', 'ncalls'),
         )
 
     def compare_chart(self, other, field='cumtime', count=35):
@@ -168,12 +166,12 @@ class StatsViewer(object):
             ax=fig.add_subplot('133')
         )
 
-    def compare_grid(self, other, lsuffix='_l', rsuffix='_r'):
+    def compare_table(self, other, lsuffix='_l', rsuffix='_r'):
 
         left = self.timings[self.default_view_fields]
         right = other.timings[self.default_view_fields]
 
-        self._show_table(
+        return self._show_table(
             left.join(
                 right,
                 lsuffix=lsuffix,
@@ -185,8 +183,8 @@ class StatsViewer(object):
         def _interact(count, field):
             self.view(count, field, show_table=False)
 
-        display(
-            SlickGrid(self.timings, self.remote_js),
+        return display(
+            show_grid(self.timings, self.remote_js),
             interactive(
                 _interact,
                 count=IntSlider(min=5, max=100, step=5, value=35),
