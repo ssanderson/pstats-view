@@ -87,7 +87,7 @@ class StatsViewer(object):
         plot_locs = [311, 312, 313]
         for field, loc in zip(fields, plot_locs):
             data = self._get_timing_data(count, field, field)
-            self._show_timing_data(data, field, ax=fig.add_subplo(loc))
+            self._show_timing_data(data, field, ax=fig.add_subplot(loc))
 
     def _get_timing_data(self, count, sort, fields):
         data = self.timings.sort_values(
